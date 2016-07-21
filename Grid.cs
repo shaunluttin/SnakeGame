@@ -40,10 +40,19 @@ public class Grid
 
         for (int h = 0; h < _snakeGrid.GetLength(0); h++)
         {
+            builder.AppendLine();
             for (var w = 0; w < _snakeGrid.GetLength(1); w++)
             {
-                var val = _snakeGrid[h, w];
-                System.Console.WriteLine($"{h} {w} {val}");
+                var isSnake = _snakeGrid[h, w];
+                if(isSnake)
+                {
+                    builder.Append(SnakeChar);
+                }
+                else
+                {
+                    builder.Append(' ');
+                }
+                // System.Console.WriteLine($"{h} {w} {isSnake}");
             }
         }
 
