@@ -16,6 +16,7 @@ public class Program
             Console.Clear();
             Console.WriteLine(DateTime.Now);
 
+            // grid.MoveSnake();
             Console.WriteLine(grid.Render());
 
             // Console.WriteLine("Press and key to move snake.");

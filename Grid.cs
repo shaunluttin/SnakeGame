@@ -13,7 +13,7 @@ public struct Point
 
     public override bool Equals(object obj)
     {
-        if(!(obj is Point))
+        if (!(obj is Point))
         {
             return false;
         }
@@ -46,6 +46,13 @@ public class Grid
     {
         _snakeGrid = new bool[height, width];
 
+        InsertSnakeBitIntoGrid(_currentSnakeStart);
+
+        MoveSnake();
+    }
+
+    public void MoveSnake()
+    {
         var counter = 0;
 
         // height
@@ -70,12 +77,30 @@ public class Grid
     {
         var point = new Point();
 
-        if(_snakeIsMoving == Direction.Right)
+        if (_snakeIsMoving == Direction.Right)
         {
+            if(_currentSnakeEnd.X + 1 >= GetGridBoundaryX())
+            {
+                return _currentSnakeEnd;
+            }
 
+            point.Y = _currentSnakeEnd.Y;
+            point.X = _currentSnakeEnd.X + 1;
+
+            _currentSnakeEnd = point;
         }
 
         return point;
+    }
+
+    public int GetGridBoundaryX()
+    {
+        return _snakeGrid.GetLength(1);
+    }
+
+    public int GetGridBoundaryY()
+    {
+        return _snakeGrid.GetLength(0);
     }
 
     public void InsertSnakeBitIntoGrid(Point point)
@@ -88,12 +113,12 @@ public class Grid
         var builder = new StringBuilder();
 
         // height
-        for (int y = 0; y < _snakeGrid.GetLength(0); y++)
+        for (int y = 0; y < GetGridBoundaryY(); y++)
         {
             builder.AppendLine();
 
             // width
-            for (var x = 0; x < _snakeGrid.GetLength(1); x++)
+            for (var x = 0; x < GetGridBoundaryX(); x++)
             {
                 var isSnake = _snakeGrid[y, x];
                 if (isSnake)
