@@ -39,7 +39,7 @@ public class Grid
     private int[,] _snakeGrid; // y, x
     private Point _currentSnakeStart = new Point(0, 0);
     private Point _currentSnakeEnd = new Point(0, 0);
-    private int _currentSnakeLength = 32;
+    private int _currentSnakeLength = 50;
     private Direction _snakeIsMoving = Direction.Right;
     private int _snakeInsertionCounter = 0;
 
@@ -76,22 +76,22 @@ public class Grid
 
     public bool IsPositionAvailableRight()
     {
-        return _currentSnakeEnd.X + 1 >= GetGridBoundaryX();
+        return _currentSnakeEnd.X + 1 <= GetGridBoundaryX();
     }
 
     public bool IsPositionAvailableLeft()
     {
-        return _currentSnakeEnd.X - 1 < 0;
+        return _currentSnakeEnd.X - 1 >= 0;
     }
 
     public bool IsPositionAvailableUp()
     {
-        return _currentSnakeEnd.Y - 1 < 0;
+        return _currentSnakeEnd.Y - 1 >= 0;
     }
 
     public bool IsPositionAvailableDown()
     {
-        return _currentSnakeEnd.Y + 1 >= GetGridBoundaryY();
+        return _currentSnakeEnd.Y + 1 <= GetGridBoundaryY();
     }
 
     public Point GetNextSnakePoint()
@@ -100,8 +100,7 @@ public class Grid
 
         if (_snakeIsMoving == Direction.Right)
         {
-            // is position available
-            if (IsPositionAvailableRight())
+            if (!IsPositionAvailableRight())
             {
                 _snakeIsMoving = Direction.Down;
                 return GetNextSnakePoint();
@@ -113,7 +112,7 @@ public class Grid
 
         if (_snakeIsMoving == Direction.Left)
         {
-            if (IsPositionAvailableLeft())
+            if (!IsPositionAvailableLeft())
             {
                 _snakeIsMoving = Direction.Up;
                 return GetNextSnakePoint();
@@ -125,7 +124,7 @@ public class Grid
 
         if (_snakeIsMoving == Direction.Down)
         {
-            if (IsPositionAvailableDown())
+            if (!IsPositionAvailableDown())
             {
                 _snakeIsMoving = Direction.Left;
                 return GetNextSnakePoint();
@@ -137,7 +136,7 @@ public class Grid
 
         if (_snakeIsMoving == Direction.Up)
         {
-            if (IsPositionAvailableUp())
+            if (!IsPositionAvailableUp())
             {
                 _snakeIsMoving = Direction.Right;
                 return GetNextSnakePoint();

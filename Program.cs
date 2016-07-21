@@ -11,19 +11,7 @@ public class Program
 
         var grid = new Grid(height: 10, width: 10);
 
-        while (true)
-        {
-            Console.Clear();
-            Console.WriteLine(DateTime.Now);
-
-            // grid.MoveSnake();
-            Console.WriteLine(grid.Render());
-
-            // Console.WriteLine("Press and key to move snake.");
-            // Console.ReadLine();
-
-            System.Threading.Thread.Sleep(REFRESH_RATE_MS);
-        }
+        Console.WriteLine(grid.Render());
     }
 
     public static void RunTests()
