@@ -17,10 +17,9 @@ public class Program
             Console.WriteLine(DateTime.Now);
 
             Console.WriteLine(grid.Render());
-            grid.MoveSnake();
 
-            Console.WriteLine("Press and key to move snake.");
-            Console.ReadLine();
+            // Console.WriteLine("Press and key to move snake.");
+            // Console.ReadLine();
 
             System.Threading.Thread.Sleep(REFRESH_RATE_MS);
         }
