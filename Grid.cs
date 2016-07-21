@@ -23,15 +23,20 @@ public class Grid
         {
             if (IsHittingWall())
             {
-                var nextSnakeStartX = _currentSnakeStartX + 1;
-                var nextSnakeEndX = nextSnakeStartX + _currentSnakeLength - 1; 
-                
-                _snakeGrid[_currentSnakeStartY, _currentSnakeStartX] = false;
-                _snakeGrid[_currentSnakeStartY, nextSnakeEndX] = true;
-
-                _currentSnakeStartX = nextSnakeStartX;
+                MoveSnakeHorizontally();
             }
         }
+    }
+
+    private void MoveSnakeHorizontally()
+    {
+        var nextSnakeStartX = _currentSnakeStartX + 1;
+        var nextSnakeEndX = nextSnakeStartX + _currentSnakeLength - 1;
+
+        _snakeGrid[_currentSnakeStartY, _currentSnakeStartX] = false;
+        _snakeGrid[_currentSnakeStartY, nextSnakeEndX] = true;
+
+        _currentSnakeStartX = nextSnakeStartX;
     }
 
     private bool IsHittingWall()
@@ -49,7 +54,7 @@ public class Grid
             for (var w = 0; w < _snakeGrid.GetLength(1); w++)
             {
                 var isSnake = _snakeGrid[h, w];
-                if(isSnake)
+                if (isSnake)
                 {
                     builder.Append(SnakeChar);
                 }
