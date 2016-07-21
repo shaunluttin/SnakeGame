@@ -9,7 +9,7 @@ public class Program
         Console.WriteLine("Tests complete. Press something to continue.");
         Console.ReadLine();
 
-        var grid = new Grid(height: 4, width: 4);
+        var grid = new Grid(height: 10, width: 10);
 
         while (true)
         {
