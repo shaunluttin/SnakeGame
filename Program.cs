@@ -7,15 +7,15 @@ public class Program
     {
         RunTests();
 
-        // var grid = new Grid(height: 10, width: 25);
+        var grid = new Grid(height: 10, width: 10);
 
-        // while (true)
-        // {
-        //     Console.WriteLine(DateTime.Now);
-        //     Console.WriteLine(grid.GetTheBigGridString());
-        //     System.Threading.Thread.Sleep(REFRESH_RATE_MS);
-        //     Console.Clear();
-        // }
+        while (true)
+        {
+            Console.WriteLine(DateTime.Now);
+            Console.WriteLine(grid.GetTheBigGridString());
+            System.Threading.Thread.Sleep(REFRESH_RATE_MS);
+            Console.Clear();
+        }
     }
 
     public static void RunTests()
