@@ -36,15 +36,16 @@ public class Grid
     private const char WidthChar = '-';
     private const char HeightChar = '|';
     private const char SnakeChar = '*';
-    private bool[,] _snakeGrid; // height, width
+    private int[,] _snakeGrid; // y, x
     private Point _currentSnakeStart = new Point(0, 0);
     private Point _currentSnakeEnd = new Point(0, 0);
-    private int _currentSnakeLength = 45;
+    private int _currentSnakeLength = 32;
     private Direction _snakeIsMoving = Direction.Right;
+    private int _snakeInsertionCounter = 0;
 
     public Grid(int height, int width)
     {
-        _snakeGrid = new bool[height, width];
+        _snakeGrid = new int[height, width];
 
         InsertSnakeBitIntoGrid(_currentSnakeStart);
 
@@ -79,6 +80,7 @@ public class Grid
 
         if (_snakeIsMoving == Direction.Right)
         {
+            // is position available
             if (_currentSnakeEnd.X + 1 >= GetGridBoundaryX())
             {
                 _snakeIsMoving = Direction.Down;
@@ -141,7 +143,8 @@ public class Grid
 
     public void InsertSnakeBitIntoGrid(Point point)
     {
-        _snakeGrid[point.Y, point.X] = true;
+        _snakeInsertionCounter++;
+        _snakeGrid[point.Y, point.X] = _snakeInsertionCounter;
     }
 
     public string Render()
@@ -156,7 +159,7 @@ public class Grid
             // width
             for (var x = 0; x < GetGridBoundaryX(); x++)
             {
-                var isSnake = _snakeGrid[y, x];
+                var isSnake = _snakeGrid[y, x] > 0;
                 if (isSnake)
                 {
                     builder.Append(SnakeChar);
