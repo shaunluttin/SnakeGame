@@ -6,14 +6,22 @@ public class Program
     public static void Main(string[] args)
     {
         RunTests();
+        Console.WriteLine("Tests complete. Press something to continue.");
+        Console.ReadLine();
 
-        var grid = new Grid(height: 10, width: 10);
+        var grid = new Grid(height: 4, width: 4);
 
         while (true)
         {
             Console.Clear();
             Console.WriteLine(DateTime.Now);
-            Console.WriteLine(grid.GetTheBigGridString());
+
+            Console.WriteLine(grid.Render());
+            grid.MoveSnake();
+
+            Console.WriteLine("Press and key to move snake.");
+            Console.ReadLine();
+
             System.Threading.Thread.Sleep(REFRESH_RATE_MS);
         }
     }
