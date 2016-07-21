@@ -10,47 +10,43 @@ public class Grid
     private int _snakeLength = 10;
     private int _snakeX = 0;
     private int _snakeY = 0;
+    private string[,] _gridArray;
 
     public Grid(int height, int width)
     {
         _height = height;
         _width = width;
+        _gridArray = BuildTheGrid(height, width);
     }
 
     public string GetTheBigGridString()
     {
         var builder = new StringBuilder();
-        BuildTheGrid(builder);
-        AddTheSnakeToTheGrid(builder);
         return builder.ToString();
     }
 
-    public void BuildTheGrid(StringBuilder builder)
+    public static string[,] BuildTheGrid(int height, int width)
     {
-        builder.AppendLine(new string(WidthChar, _width));
-        Enumerable.Range(0, _height - 2).ToList().ForEach(x =>
+        var array = new string[height, width];
+
+        for (int h = 0; h < height; h++)
         {
-            builder.AppendLine("|" + new string(' ', _width - 2) + HeightChar);
-        });
-        builder.AppendLine(new string(WidthChar, _width));
+            for (var w = 0; w < width; w++)
+            {
+                array[h, w] = ((h * width) + w).ToString();
+            }
+        }
+
+        return array;
     }
 
     public void AddTheSnakeToTheGrid(StringBuilder builder)
     {
-        var snakeStartIndex 
-            = _snakeX + 1
-            + ((_snakeY + 1) * _width);
 
-        ReplaceCharactersBetween(builder, 0, 10, 'x');
-
-        ReplaceCharactersBetween(builder, _width + 1, _width + 1 + 10, 'x');
-        
     }
 
     public void ReplaceCharactersBetween(StringBuilder builder, int start, int end, char replacement)
     {
-        builder.Remove(start, end - start);
-        builder.Insert(start, new string(replacement, end - start));
 
     }
 }
