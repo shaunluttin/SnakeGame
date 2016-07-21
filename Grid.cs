@@ -57,10 +57,10 @@ public class Grid
         var counter = 0;
 
         // height
-        for (int y = 0; y < _snakeGrid.GetLength(0); y++)
+        for (int y = 0; y <= GetGridBoundaryY(); y++)
         {
             // width
-            for (var x = 0; x < _snakeGrid.GetLength(1); x++)
+            for (var x = 0; x <= GetGridBoundaryX(); x++)
             {
                 if (counter >= _currentSnakeLength)
                 {
@@ -133,12 +133,12 @@ public class Grid
 
     public int GetGridBoundaryX()
     {
-        return _snakeGrid.GetLength(1);
+        return _snakeGrid.GetLength(1) - 1;
     }
 
     public int GetGridBoundaryY()
     {
-        return _snakeGrid.GetLength(0);
+        return _snakeGrid.GetLength(0) - 1;
     }
 
     public void InsertSnakeBitIntoGrid(Point point)
@@ -152,12 +152,12 @@ public class Grid
         var builder = new StringBuilder();
 
         // height
-        for (int y = 0; y < GetGridBoundaryY(); y++)
+        for (int y = 0; y <= GetGridBoundaryY(); y++)
         {
             builder.AppendLine();
 
             // width
-            for (var x = 0; x < GetGridBoundaryX(); x++)
+            for (var x = 0; x <= GetGridBoundaryX(); x++)
             {
                 var isSnake = _snakeGrid[y, x] > 0;
                 if (isSnake)
