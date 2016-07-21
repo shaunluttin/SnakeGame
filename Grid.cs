@@ -1,5 +1,4 @@
 using System.Text;
-using System.Linq;
 
 public class Grid
 {
@@ -8,44 +7,24 @@ public class Grid
     private readonly int _height;
     private readonly int _width;
     private int _snakeLength = 10;
-    private int _snakeX = 0;
-    private int _snakeY = 0;
-    private string[,] _gridArray;
+    private int _snakeStartX = 0;
+    private int _snakeStartY = 0;
+    private bool[,] _snakeGrid;
 
     public Grid(int height, int width)
     {
         _height = height;
         _width = width;
-        _gridArray = BuildTheGrid(height, width);
     }
 
     public string GetTheBigGridString()
     {
         var builder = new StringBuilder();
 
-        for (int h = 0; h < _height; h++)
-        {
-            for (var w = 0; w < _width; w++)
-            {
-                builder.Append(' ');
-                if (_snakeX == w && _snakeY == h)
-                {
-                    builder.Append(new string('*', _snakeLength));
-                }
-            }
-
-            builder.AppendLine();
-        }
-
         return builder.ToString();
     }
 
-    public void AddToOrBottomToGrid()
-    {
-
-    }
-
-    public static string[,] BuildTheGrid(int height, int width)
+    public static string[,] TestTheGrid(int height, int width)
     {
         var array = new string[height, width];
 
@@ -58,15 +37,5 @@ public class Grid
         }
 
         return array;
-    }
-
-    public void AddTheSnakeToTheGrid(StringBuilder builder)
-    {
-
-    }
-
-    public void ReplaceCharactersBetween(StringBuilder builder, int start, int end, char replacement)
-    {
-
     }
 }

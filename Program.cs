@@ -23,7 +23,7 @@ public class Program
         var height = 3;
         var width = 3;
 
-        var grid = Grid.BuildTheGrid(width, height);
+        var grid = Grid.TestTheGrid(width, height);
         Console.WriteLine(Convert.ToInt16(grid[0, 1]) == 1);
         Console.WriteLine(Convert.ToInt16(grid[0, 2]) == 2);
 
