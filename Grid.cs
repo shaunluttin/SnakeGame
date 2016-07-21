@@ -21,7 +21,7 @@ public class Grid
     {
         if (_snakeIsMovingHorizontally)
         {
-            if (IsHittingWall())
+            if (!IsHittingWall())
             {
                 MoveSnakeHorizontally();
             }
@@ -41,7 +41,7 @@ public class Grid
 
     private bool IsHittingWall()
     {
-        return _currentSnakeStartX + _currentSnakeLength < _snakeGrid.GetLength(0);
+        return _currentSnakeStartX + _currentSnakeLength > _snakeGrid.GetLength(0);
     }
 
     public string Render()
