@@ -79,17 +79,28 @@ public class Grid
 
         if (_snakeIsMoving == Direction.Right)
         {
-            if(_currentSnakeEnd.X + 1 >= GetGridBoundaryX())
+            if (_currentSnakeEnd.X + 1 >= GetGridBoundaryX())
             {
-                return _currentSnakeEnd;
+                _snakeIsMoving = Direction.Down;
+                return GetNextSnakePoint();
             }
 
             point.Y = _currentSnakeEnd.Y;
             point.X = _currentSnakeEnd.X + 1;
-
-            _currentSnakeEnd = point;
         }
 
+        if (_snakeIsMoving == Direction.Down)
+        {
+            if (_currentSnakeEnd.Y + 1 >= GetGridBoundaryY())
+            {
+                return _currentSnakeEnd; // TODO handle this case.
+            }
+
+            point.Y = _currentSnakeEnd.Y + 1;
+            point.X = _currentSnakeEnd.X;
+        }
+
+        _currentSnakeEnd = point;
         return point;
     }
 
