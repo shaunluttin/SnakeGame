@@ -39,7 +39,7 @@ public class Grid
     private bool[,] _snakeGrid; // height, width
     private Point _currentSnakeStart = new Point(0, 0);
     private Point _currentSnakeEnd = new Point(0, 0);
-    private int _currentSnakeLength = 14;
+    private int _currentSnakeLength = 45;
     private Direction _snakeIsMoving = Direction.Right;
 
     public Grid(int height, int width)
@@ -89,14 +89,39 @@ public class Grid
             point.X = _currentSnakeEnd.X + 1;
         }
 
+        if (_snakeIsMoving == Direction.Left)
+        {
+            if (_currentSnakeEnd.X - 1 < 0)
+            {
+                _snakeIsMoving = Direction.Up;
+                return GetNextSnakePoint();
+            }
+
+            point.Y = _currentSnakeEnd.Y;
+            point.X = _currentSnakeEnd.X - 1;
+        }
+
         if (_snakeIsMoving == Direction.Down)
         {
             if (_currentSnakeEnd.Y + 1 >= GetGridBoundaryY())
             {
-                return _currentSnakeEnd; // TODO handle this case.
+                _snakeIsMoving = Direction.Left;
+                return GetNextSnakePoint();
             }
 
             point.Y = _currentSnakeEnd.Y + 1;
+            point.X = _currentSnakeEnd.X;
+        }
+
+        if (_snakeIsMoving == Direction.Up)
+        {
+            if (_currentSnakeEnd.Y - 1 < 0)
+            {
+                _snakeIsMoving = Direction.Right;
+                return GetNextSnakePoint();
+            }
+
+            point.Y = _currentSnakeEnd.Y - 1;
             point.X = _currentSnakeEnd.X;
         }
 
