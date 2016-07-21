@@ -11,10 +11,10 @@ public class Program
 
         while (true)
         {
+            Console.Clear();
             Console.WriteLine(DateTime.Now);
             Console.WriteLine(grid.GetTheBigGridString());
             System.Threading.Thread.Sleep(REFRESH_RATE_MS);
-            Console.Clear();
         }
     }
 

@@ -23,7 +23,6 @@ public class Grid
     {
         var builder = new StringBuilder();
 
-        builder.AppendLine("|" + + "|");
         for (int h = 0; h < _height; h++)
         {
             for (var w = 0; w < _width; w++)
@@ -31,7 +30,7 @@ public class Grid
                 builder.Append(' ');
                 if (_snakeX == w && _snakeY == h)
                 {
-                    builder.Append("*");
+                    builder.Append(new string('*', _snakeLength));
                 }
             }
 
@@ -43,7 +42,7 @@ public class Grid
 
     public void AddToOrBottomToGrid()
     {
-        
+
     }
 
     public static string[,] BuildTheGrid(int height, int width)
