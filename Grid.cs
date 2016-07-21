@@ -10,6 +10,17 @@ public struct Point
         Y = y;
         X = x;
     }
+
+    public override bool Equals(object obj)
+    {
+        if(!(obj is Point))
+        {
+            return false;
+        }
+
+        var val = (Point)obj;
+        return val.X == this.X && val.Y == this.Y;
+    }
 }
 
 public enum Direction
@@ -26,15 +37,14 @@ public class Grid
     private const char HeightChar = '|';
     private const char SnakeChar = '*';
     private bool[,] _snakeGrid; // height, width
-    private Point _currentSnakeStart;
-    private Point _currentSnakeEnd;
+    private Point _currentSnakeStart = new Point(0, 0);
+    private Point _currentSnakeEnd = new Point(0, 0);
     private int _currentSnakeLength = 14;
-    private Direction _snakeIsMoving;
+    private Direction _snakeIsMoving = Direction.Right;
 
     public Grid(int height, int width)
     {
         _snakeGrid = new bool[height, width];
-        _currentSnakeStart = new Point(0, 0);
 
         var counter = 0;
 
@@ -49,10 +59,23 @@ public class Grid
                     break;
                 }
 
-                InsertSnakeBitIntoGrid(new Point(y, x));
+                var point = GetNextSnakePoint();
+                InsertSnakeBitIntoGrid(point);
                 counter++;
             }
         }
+    }
+
+    public Point GetNextSnakePoint()
+    {
+        var point = new Point();
+
+        if(_snakeIsMoving == Direction.Right)
+        {
+
+        }
+
+        return point;
     }
 
     public void InsertSnakeBitIntoGrid(Point point)
