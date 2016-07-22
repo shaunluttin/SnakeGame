@@ -10,17 +10,6 @@ public struct Point
         Y = y;
         X = x;
     }
-
-    public override bool Equals(object obj)
-    {
-        if (!(obj is Point))
-        {
-            return false;
-        }
-
-        var val = (Point)obj;
-        return val.X == this.X && val.Y == this.Y;
-    }
 }
 
 public enum Direction
@@ -39,9 +28,10 @@ public class Grid
     private int[,] _snakeGrid; // y, x
     private Point _currentSnakeStart = new Point(0, 0);
     private Point _currentSnakeEnd = new Point(0, 0);
-    private int _currentSnakeLength = 5;
+    private int _currentSnakeLength = 10;
     private Direction _snakeIsMoving = Direction.Right;
     private int _snakeInsertionCounter = 0;
+    private int _lowest = 1;
 
     public Grid(int height, int width)
     {
@@ -49,10 +39,17 @@ public class Grid
 
         InsertSnakeBitIntoGrid(_currentSnakeStart);
 
-        MoveSnake();
+        CreateSnake();
     }
 
     public void MoveSnake()
+    {
+        var point = GetNextSnakePoint();
+        InsertSnakeBitIntoGrid(point);
+        RemoveLowestSnakeBitFromGrid();
+    }
+
+    public void CreateSnake()
     {
         var counter = 0;
 
@@ -69,7 +66,6 @@ public class Grid
 
                 var point = GetNextSnakePoint();
                 InsertSnakeBitIntoGrid(point);
-                RemoveLowestSnakeBitFromGrid();
                 counter++;
             }
         }
@@ -77,7 +73,18 @@ public class Grid
 
     public void RemoveLowestSnakeBitFromGrid()
     {
-        
+        for (int y = 0; y <= GetGridBoundaryY(); y++)
+        {
+            for (int x = 0; x <= GetGridBoundaryX(); x++)
+            {
+                if (_snakeGrid[y, x] == _lowest)
+                {
+                    _snakeGrid[y, x] = 0;
+                    _lowest++;
+                    return;
+                }
+            }
+        }
     }
 
     public bool IsPositionAvailableRight()
@@ -184,12 +191,9 @@ public class Grid
     {
         var builder = new StringBuilder();
 
-        // height
         for (int y = 0; y <= GetGridBoundaryY(); y++)
         {
             builder.AppendLine();
-
-            // width
             for (var x = 0; x <= GetGridBoundaryX(); x++)
             {
                 var isSnake = _snakeGrid[y, x] > 0;
@@ -205,20 +209,5 @@ public class Grid
         }
 
         return builder.ToString();
-    }
-
-    public static string[,] TestTheGrid(int height, int width)
-    {
-        var array = new string[height, width];
-
-        for (int h = 0; h < array.GetLength(0); h++)
-        {
-            for (var w = 0; w < array.GetLength(1); w++)
-            {
-                array[h, w] = ((h * width) + w).ToString();
-            }
-        }
-
-        return array;
     }
 }
