@@ -69,9 +69,15 @@ public class Grid
 
                 var point = GetNextSnakePoint();
                 InsertSnakeBitIntoGrid(point);
+                RemoveLowestSnakeBitFromGrid();
                 counter++;
             }
         }
+    }
+
+    public void RemoveLowestSnakeBitFromGrid()
+    {
+        
     }
 
     public bool IsPositionAvailableRight()
