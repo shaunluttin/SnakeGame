@@ -39,7 +39,7 @@ public class Grid
     private int[,] _snakeGrid; // y, x
     private Point _currentSnakeStart = new Point(0, 0);
     private Point _currentSnakeEnd = new Point(0, 0);
-    private int _currentSnakeLength = 50;
+    private int _currentSnakeLength = 5;
     private Direction _snakeIsMoving = Direction.Right;
     private int _snakeInsertionCounter = 0;
 
