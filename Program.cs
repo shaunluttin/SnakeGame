@@ -1,11 +1,13 @@
-﻿using System.Text;
-using System;
+﻿using System;
+using System.Text;
+
 public class MainClass
 {
     private const int REFRESH_RATE_MS = 100;
 
     public static void Main(string[] args)
     {
+        // TODO: Handle StackOverflowError when there are now spots left! :)
         var grid = new Grid(height: 20, width: 20, initialSnakeLength: 100);
 
         while (true)
@@ -43,8 +45,6 @@ public enum Direction
 
 public class Grid
 {
-    private const char WidthChar = '-';
-    private const char HeightChar = '|';
     private const char SnakeChar = '*';
     private int[,] _snakeGrid; // y, x
     private Point _currentSnakeStart = new Point(0, 0);
@@ -138,6 +138,7 @@ public class Grid
             && _snakeGrid[candidate, _currentSnakeEnd.X] == 0;
     }
 
+    // TODO Make this method into smaller methods. 
     public Point GetNextSnakePoint()
     {
         var point = new Point();
