@@ -86,7 +86,6 @@ public class Grid
         var candidate = _currentSnakeEnd.X - 1;
         return candidate >= 0
             && _snakeGrid[_currentSnakeEnd.Y, candidate] == 0;
-
     }
 
     public bool IsPositionAvailableUp()
