@@ -76,22 +76,31 @@ public class Grid
 
     public bool IsPositionAvailableRight()
     {
-        return _currentSnakeEnd.X + 1 <= GetGridBoundaryX();
+        var candidate = _currentSnakeEnd.X + 1;
+        return candidate <= GetGridBoundaryX()
+            && _snakeGrid[_currentSnakeEnd.Y, candidate] == 0;
     }
 
     public bool IsPositionAvailableLeft()
     {
-        return _currentSnakeEnd.X - 1 >= 0;
+        var candidate = _currentSnakeEnd.X - 1;
+        return candidate >= 0
+            && _snakeGrid[_currentSnakeEnd.Y, candidate] == 0;
+
     }
 
     public bool IsPositionAvailableUp()
     {
-        return _currentSnakeEnd.Y - 1 >= 0;
+        var candidate = _currentSnakeEnd.Y - 1;
+        return candidate >= 0
+            && _snakeGrid[candidate, _currentSnakeEnd.X] == 0;
     }
 
     public bool IsPositionAvailableDown()
     {
-        return _currentSnakeEnd.Y + 1 <= GetGridBoundaryY();
+        var candidate = _currentSnakeEnd.Y + 1;
+        return candidate <= GetGridBoundaryY()
+            && _snakeGrid[candidate, _currentSnakeEnd.X] == 0;
     }
 
     public Point GetNextSnakePoint()
